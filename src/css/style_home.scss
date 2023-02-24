@@ -1,0 +1,14 @@
+.div_home{
+    width: 100%;
+    img: 20%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 1%;
+    img {
+        width: 30%;
+    }
+    p {
+        width: 30%;
+    }
+}

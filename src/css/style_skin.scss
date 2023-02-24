@@ -1,0 +1,13 @@
+.div_skin{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    li {
+        width: 50%;
+        display: flex;
+        align-items: center;
+        img{
+            width: 50%;
+        }
+    }
+}

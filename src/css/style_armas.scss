@@ -1,0 +1,23 @@
+
+// --------- BODY ---------
+html{
+    background-color: rgb(119, 119, 119);
+}
+.ul_armas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    }
+
+.li_armas{
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: white;
+        border-radius: 10px;
+        margin: 10px;
+        img{
+            width: 80%;
+        }
+}
