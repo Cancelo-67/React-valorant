@@ -9,6 +9,9 @@ import {
   FormHelperText,
   Center,
   Button,
+  InputRightElement,
+  InputGroup,
+  FormErrorMessage,
 } from '@chakra-ui/react'
 
 import '../css/style_iniciosesion.scss'
