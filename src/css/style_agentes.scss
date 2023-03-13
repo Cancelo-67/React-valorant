@@ -23,9 +23,12 @@
         margin: 1%;
         padding: 1%;
         border-radius: 5%;
-        img{
-            
-            width: 50%;
+        a{
+            display: flex;
+            justify-content: center;
+            img{
+                width: 50%;
+            }
         }
     }
 }

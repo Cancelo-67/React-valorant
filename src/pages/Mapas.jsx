@@ -2,6 +2,7 @@ import '../css/style_maps.scss'
 
 import React, { useEffect, useState } from 'react'
 import { Box } from '@chakra-ui/react'
+import { CircleLoader } from 'react-spinners'
 
 const Agentes = () => {
   const url = 'https://valorant-api.com/v1/maps'
@@ -19,8 +20,8 @@ const Agentes = () => {
   return (
     <Box background={'gray'}>
       <ul className='ul_mapas'>
-        {!mapas ? 'Cargando...' : 
-        mapas.map( (mapa) => {
+        {!mapas ? <CircleLoader color="#b12f3a"/> : 
+        mapas.map( mapa => {
           return <li id={mapa.uuid} className=''>
             <img src={mapa.splash} alt="" />
             <p>{mapa.displayName}</p>

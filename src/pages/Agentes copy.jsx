@@ -10,10 +10,8 @@ const Agentes = () => {
   //useState de los personajes
   const [agentes, setAgentes] = useState()
   //useState del buscador de personajes
-  const [buscar, setBuscar] = useState("");
-  //Array donde se guardara el objeto agente 
-  //const [favoritos, setFavoritos] = useState([])
-  const favoritos = [];
+  const [buscar, setBuscar] = useState("")
+  //useState que la uso para que aparezca el boton de con el corazon relleno o sin rellenar
 
   const fetchApi = async () => {
     const response = await fetch(url)
@@ -26,39 +24,51 @@ const Agentes = () => {
   }, [])
 
 
-const tratarFavorito = (e, agente) => {
-  if (e.target.src === 'http://localhost:5173/src/img/heart-regular.svg') {
-    añadirFavorito(e,agente)
-  }else{
-    eliminarFavorito(e,agente)
-  }
-    // comprobar si está en favoritos => checkIfFavorito()
+const tratarFavorito = (e) => {
+  console.log(e)
+   // comprobar si está en favoritos => checkIfFavorito()
       // true => llamar a eliminarFavorito()
       // false =>  llamar a añadirFavorito()
+
+
 }
 
-const eliminarFavorito = (e,agente) => {
-  e.target.src = corazonVacio
-  const posi = favoritos.map((object)=>object.displayName).indexOf(agente.displayName)
-  favoritos.splice(posi,1)
-  console.log('eliminado')
-  console.log(favoritos)
+
+checkIfFavorito = () => {
+  // o compruebo el corazon
+  // o voy a favorito y checkeo si está
+  // Devuelva un booleano
+}
+
+eliminarFavorito = () => {
   ///cambiar el corazon 
   // descarego favoritos, lo recorro, elimino el elemento que ha selecconado y lo vuelvo a subir.
 
 }
 
 
-const añadirFavorito = (e,agente) => {
-  e.target.src = corazonLleno
-  console.log('añadido')
-  favoritos.push(agente)
-  console.log(favoritos)
+añadirFavorito = () => {
   ///cambiar el corazon 
   // descarego favoritos, añado el elemento que ha selecconado y lo vuelvo a subir.
 
 }
 
+
+
+  // const eliminarFav= agente =>{
+  //   localStorage.removeItem(`agente${agente.displayName}`)
+  //   //TODO: Hacer que se elimine la uuid del localstorage y actualizar el array agenteFavorito.
+  //   setGuardado(false)
+    
+  // }
+
+  // const guardarfav = agente =>{
+  //   //agenteFavorito.push(agente)
+  //   localStorage.setItem(`agente${agente.displayName}`, JSON.stringify(agente))
+  //   //localStorage.setItem('favoritos', JSON.stringify(agentefav))
+  //   setGuardado(true)
+  //   //localStorage.clear()
+  // }
 
   //Busqueda de personajes
   const buscador = (e) => {
@@ -74,11 +84,11 @@ const añadirFavorito = (e,agente) => {
       <ul className='ul_agente'>
         {!agentes ? <CircleLoader color="#b12f3a"/> :
         resultado.map( (agente,index) => {
-          return <li key={index} className='li_agente'>
+          return <li key={index} className='li_agente' id={agente.uuid}>
             <p>{agente.displayName}</p>
-            <img src={agente.bustPortrait} alt = {`Imagen de ${agente.displayName}`}/>
+            <img src={agente.bustPortrait} alt={`Imagen de ${agente.displayName}`}/>
             <p>{agente.role.displayName}</p>
-              <button key={agente.uuid} onClick={(e) => tratarFavorito(e, agente)}><img width='30px' src={corazonVacio}/></button>
+              <button key={agente.uuid} onClick={(e)=>tratarFavorito()}><img width='30px' src={corazonVacio}/></button>
           </li>
         })
         }

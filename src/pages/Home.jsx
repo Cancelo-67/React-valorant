@@ -1,10 +1,11 @@
 import React from 'react'
 import logo from '../img/logo_transparent.png'
 import '../css/style_home.scss'
+import { Box } from '@chakra-ui/react'
 
 const Home = () => {
   return (
-    <main className='div_home'>
+    <Box className='div_home' background={'gray'}>
         <img src={logo}/>
         <p>Valorant es un hero shooter en primera persona
              multijugador gratuito desarrollado y publicado por Riot Games.
@@ -12,7 +13,7 @@ const Home = () => {
               octubre de 2019. Fue lanzado para Microsoft Windows el 2 de junio de 2020 
               después de su beta cerrada lanzada el 7 de abril de 2020
         </p>
-    </main>
+    </Box>
   )
 }
 

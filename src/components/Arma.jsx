@@ -1,3 +1,4 @@
+import { Box } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { CircleLoader } from 'react-spinners'
@@ -19,34 +20,37 @@ const Arma = () => {
    
     
   return (
-    <>
-    {!armas ? <CircleLoader color="#b12f3a" /> :
+    <Box color={'gray'  }>
+    {!armas ? 
+    <div className='div_load'>
+      <CircleLoader color="#b12f3a"/>
+    </div> :
     armas.map((arma)=>{
 
       if(arma.weaponStats === null) { 
         return (
-        <div>
+        <Box color={'gray'}>
           <li>
             <p>{arma.displayName}</p>
             <Link to={`/armas/${arma.displayName}`} ><img src={arma.displayIcon}/></Link>
             <button>Favoritos</button>
           </li>
-        </div>
+        </Box>
         )
       }else{
         return (
-      <div>
+      <Box>
         <li>
           <p>{arma.displayName}</p>
           <Link to={`/armas/${arma.uuid}`} ><img src={arma.displayIcon}/></Link>
           <p>Daño: {arma.weaponStats.fireRate}</p>
           <button>Favoritos</button>
       </li>
-      </div>)
+      </Box>)
       }
     
     })}
-    </>
+    </Box>
     )
 }
 export default Arma
