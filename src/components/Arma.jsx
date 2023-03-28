@@ -20,7 +20,7 @@ const Arma = () => {
    
     
   return (
-    <Box color={'gray'  }>
+    <Box color={'gray'}>
     {!armas ? 
     <div className='div_load'>
       <CircleLoader color="#b12f3a"/>

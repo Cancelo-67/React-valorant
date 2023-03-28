@@ -1,7 +1,7 @@
 
 // --------- BODY ---------
 html{
-    background-color: rgb(119, 119, 119);
+    background-color: gray;
 }
 .div_load{
     min-height: 700px;
@@ -18,7 +18,6 @@ html{
         display: flex;
         flex-direction: column;
         align-items: center;
-        background-color: white;
         border-radius: 10px;
         margin: 10px;
         img{

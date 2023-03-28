@@ -20,8 +20,6 @@ const Navbar = () => {
           <NavLink to='/favoritos' className='nav_button'>
             Favoritos
           </NavLink>
-      </nav>
-      <nav className='container_nav2'>
           <NavLink to='/login' className='nav_button'>
             Iniciar Sesion
           </NavLink>

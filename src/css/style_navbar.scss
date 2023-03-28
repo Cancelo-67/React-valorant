@@ -18,7 +18,7 @@
     a{
         width: 18%;
         img{
-            width: 100%;
+            width: 60%;
         }
     }
 }
@@ -26,14 +26,7 @@
     width: 10%;
 }
 .container_nav{
-    width: 50%;
-    display: flex;
-    align-items: center;
-    align-content: center;
-    justify-content: space-around;
-}
-.container_nav2{
-    width: 58%;
+    width: 82%;
     display: flex;
     align-items: center;
     align-content: center;
@@ -41,8 +34,8 @@
 }
 
 // <----------Botones nav----------------->
-
 .nav_button{
+    width: 2px;
     text-decoration: none;
     padding: 10px;
     font-weight: 600;
