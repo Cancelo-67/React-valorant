@@ -1,18 +1,22 @@
-import React from 'react'
+import { Box } from "@chakra-ui/react";
+import React from "react";
+import { CircleLoader } from "react-spinners";
 
 const Favoritos = () => {
-  const datos = Object.keys(localStorage);
-  datos.map( dato =>{
-    if (datos.includes('agente')) {
+  let datos = JSON.parse(localStorage.getItem("favoritos"));
 
-    }
-  })
+  console.log(datos);
 
   return (
-    <div>
-
-    </div>
-  )
-}
-
-export default Favoritos
+    <Box>
+      {!datos ? (
+        <CircleLoader color="#b12f3a" />
+      ) : (
+        datos.map((agenteFav, index) => {
+          return <li key={index}>{agenteFav.displayName}</li>;
+        })
+      )}
+    </Box>
+  );
+};
+export default Favoritos;

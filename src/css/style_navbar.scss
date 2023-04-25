@@ -1,57 +1,56 @@
 // --------- HEADER ---------
 * {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    font-family: 'Roboto', sans-serif;
-    color: rgb(0, 0, 0);
-    text-decoration: none;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: "Roboto", sans-serif;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
 }
-.div_nav{
-    background-color: black;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    border-radius: 2px;
-    width: 100%;
-    height: 80%;
-    a{
-        width: 18%;
-        img{
-            width: 60%;
-        }
+.div_nav {
+  background-color: black;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  border-radius: 2px;
+  width: 100%;
+  height: 80%;
+  a {
+    width: 7%;
+    img {
+      width: 60%;
     }
+  }
 }
-.img_nav{
-    width: 10%;
+.img_nav {
+  width: 10%;
 }
-.container_nav{
-    width: 82%;
-    display: flex;
-    align-items: center;
-    align-content: center;
-    justify-content: space-around;
+.container_nav {
+  width: 82%;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: space-around;
 }
 
 // <----------Botones nav----------------->
-.nav_button{
-    width: 2px;
-    text-decoration: none;
-    padding: 10px;
-    font-weight: 600;
-    font-size: 16px;
-    color: #ffffff;
-    background-color: #000000;
-    border-radius: 6px;
-    transition: 0,2s linear;
+.nav_button {
+  width: 2px;
+  text-decoration: none;
+  padding: 10px;
+  font-weight: 600;
+  font-size: 16px;
+  color: #ffffff;
+  background-color: #000000;
+  border-radius: 6px;
+  transition: 0, 2s linear;
 }
 
-.nav_button:hover{
-    border-bottom: solid 1px #f70202;
-    transition: 1.0s linear;
+.nav_button:hover {
+  border-bottom: solid 1px #f70202;
+  transition: 1s linear;
 }
 .nav_button:active {
-    position:relative;
-    top:1px;
+  position: relative;
+  top: 1px;
 }
-

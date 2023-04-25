@@ -4,9 +4,10 @@ import React, { useEffect, useState } from "react";
 import { Box } from "@chakra-ui/react";
 import { CircleLoader } from "react-spinners";
 
-const Agentes = () => {
+const Mapas = () => {
   const url = "https://valorant-api.com/v1/maps";
   const [mapas, setMapas] = useState();
+  const [mapasCargados, setmapasCargados] = useState([]);
   const fetchApi = async () => {
     const response = await fetch(url);
     const responseJSON = await response.json();
@@ -15,6 +16,20 @@ const Agentes = () => {
   useEffect(() => {
     fetchApi();
   }, []);
+
+  useEffect(() => {
+    function handleScroll() {
+      const bottom =
+        Math.ceil(window.innerHeight + window.scrollY) >=
+        document.documentElement.scrollHeight;
+      if (bottom) {
+        // si llega al final de la página, carga más elementos
+        setmapasCargados(mapasCargados + 5); // cargas 5 elementos mas
+      }
+    }
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [mapasCargados]);
   return (
     <Box background={"gray"}>
       <ul className="ul_mapas">
@@ -35,4 +50,4 @@ const Agentes = () => {
   );
 };
 
-export default Agentes;
+export default Mapas;

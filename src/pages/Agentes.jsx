@@ -9,13 +9,11 @@ import { callApi } from "../helper/callApi";
 const Agentes = () => {
   const url = "https://valorant-api.com/v1/agents?isPlayableCharacter=true";
   const [buscar, setBuscar] = useState(Boolean);
-  //Array donde se guardara el objeto agente
-  //const [favoritos, setFavoritos] = useState([])
   const [selectedAgente, setSelectedAgente] = useState("");
 
   const [favoritos, setFavoritos] = useState([]);
   const [agentes, setAgentes] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true); // Si es false sale el spinner, si esta false carga el array
   const [agentesCargados, setagentesCargados] = useState(10);
 
   //Llamo a la funcion
@@ -27,38 +25,47 @@ const Agentes = () => {
       }));
       setAgentes(agentesActualizados);
       setLoading(false);
+      //localStorage.removeItem("favoritos");
     });
   }, []);
 
   //Favoritos
   const handleBookmarks = (e, agente) => {
     setSelectedAgente(agente);
-
+    console.log(e.target.src);
     if (e.target.src === "http://localhost:5173/src/img/heart-regular.svg") {
       añadirFavorito(e, agente);
     } else {
       eliminarFavorito(e, agente);
     }
   };
+  //Actualizara el localstorage cada vez que elimino o añado algo al array
+  function actualizarLocalStorage(favoritos) {
+    localStorage.setItem("favoritos", JSON.stringify(favoritos));
+  }
 
   //Elimina del array el agente marcado
   const eliminarFavorito = (e, agente) => {
+    agente.favoritos = false;
     e.target.src = corazonVacio;
     const posi = favoritos
       .map((object) => object.displayName)
       .indexOf(agente.displayName);
     favoritos.splice(posi, 1);
-    console.log("eliminado");
     console.log(favoritos);
+    console.log("eliminado");
+    actualizarLocalStorage(favoritos);
     ///cambiar el corazon
     // descargo favoritos, lo recorro, elimino el elemento que ha selecconado y lo vuelvo a subir.
   };
   //Añade el agente marcado al array
   const añadirFavorito = (e, agente) => {
+    agente.favoritos = true;
     e.target.src = corazonLleno;
+    console.log(favoritos);
     console.log("añadido");
     favoritos.push(agente);
-    console.log(favoritos);
+    actualizarLocalStorage(favoritos);
     ///cambiar el corazon
     // descarego favoritos, añado el elemento que ha selecconado y lo vuelvo a subir.
   };
@@ -74,7 +81,7 @@ const Agentes = () => {
           dato.displayName.toLowerCase().includes(buscar.toLocaleLowerCase())
         )
         .slice(0, agentesCargados);
-
+  //Scroll infinito
   useEffect(() => {
     function handleScroll() {
       const bottom =
