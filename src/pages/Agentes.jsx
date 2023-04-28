@@ -32,11 +32,10 @@ const Agentes = () => {
   //Favoritos
   const handleBookmarks = (e, agente) => {
     setSelectedAgente(agente);
-    console.log(e.target.src);
-    if (e.target.src === "http://localhost:5173/src/img/heart-regular.svg") {
-      añadirFavorito(e, agente);
-    } else {
+    if (agente.favoritos) {
       eliminarFavorito(e, agente);
+    } else {
+      añadirFavorito(e, agente);
     }
   };
   //Actualizara el localstorage cada vez que elimino o añado algo al array
@@ -81,6 +80,7 @@ const Agentes = () => {
           dato.displayName.toLowerCase().includes(buscar.toLocaleLowerCase())
         )
         .slice(0, agentesCargados);
+
   //Scroll infinito
   useEffect(() => {
     function handleScroll() {
