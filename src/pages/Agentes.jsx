@@ -2,19 +2,20 @@ import React, { useEffect, useState } from "react";
 import { CircleLoader } from "react-spinners";
 import { Box, Input } from "@chakra-ui/react";
 import "../css/style_agentes.scss";
-import corazonVacio from "../img/heart-regular.svg";
-import corazonLleno from "../img/heart-solid.svg";
+import corazonVacio from "../img/corazonVacio.svg";
+import corazonLleno from "../img/corazonLleno.svg";
 import { callApi } from "../helper/callApi";
 
 const Agentes = () => {
+  const favoritosInicial = JSON.parse(localStorage.getItem("favoritos")) || [];
+
   const url = "https://valorant-api.com/v1/agents?isPlayableCharacter=true";
   const [buscar, setBuscar] = useState(Boolean);
-  const [selectedAgente, setSelectedAgente] = useState("");
-
-  const [favoritos, setFavoritos] = useState([]);
+  const [favoritos, setFavoritos] = useState(favoritosInicial);
   const [agentes, setAgentes] = useState([]);
   const [loading, setLoading] = useState(true); // Si es false sale el spinner, si esta false carga el array
   const [agentesCargados, setagentesCargados] = useState(10);
+  actualizarLocalStorage(favoritos);
 
   //Llamo a la funcion
   useEffect(() => {
@@ -22,38 +23,29 @@ const Agentes = () => {
       const agentesActualizados = resuelto.map((agente) => ({
         ...agente,
         favoritos: false,
+        corazonFav: corazonVacio,
       }));
       setAgentes(agentesActualizados);
       setLoading(false);
-      //localStorage.removeItem("favoritos");
     });
   }, []);
-
   //Favoritos
   const handleBookmarks = (e, agente) => {
-    setSelectedAgente(agente);
-    if (agente.favoritos) {
+    if (agente.corazonFav === corazonLleno) {
       eliminarFavorito(e, agente);
     } else {
       añadirFavorito(e, agente);
     }
   };
-  //Actualizara el localstorage cada vez que elimino o añado algo al array
-  function actualizarLocalStorage(favoritos) {
-    localStorage.setItem("favoritos", JSON.stringify(favoritos));
-  }
 
   //Elimina del array el agente marcado
   const eliminarFavorito = (e, agente) => {
     agente.favoritos = false;
     e.target.src = corazonVacio;
-    const posi = favoritos
-      .map((object) => object.displayName)
-      .indexOf(agente.displayName);
-    favoritos.splice(posi, 1);
+    agente.corazonFav = corazonVacio;
+    setFavoritos(favoritos.filter((item) => item.uuid !== agente.uuid));
     console.log(favoritos);
     console.log("eliminado");
-    actualizarLocalStorage(favoritos);
     ///cambiar el corazon
     // descargo favoritos, lo recorro, elimino el elemento que ha selecconado y lo vuelvo a subir.
   };
@@ -61,13 +53,20 @@ const Agentes = () => {
   const añadirFavorito = (e, agente) => {
     agente.favoritos = true;
     e.target.src = corazonLleno;
+    agente.corazonFav = corazonLleno;
+    setFavoritos([...favoritos, agente]);
     console.log(favoritos);
     console.log("añadido");
-    favoritos.push(agente);
-    actualizarLocalStorage(favoritos);
     ///cambiar el corazon
     // descarego favoritos, añado el elemento que ha selecconado y lo vuelvo a subir.
   };
+  console.log(favoritos);
+
+  //Actualizara el localstorage cada vez que elimino o añado algo al array
+  function actualizarLocalStorage(favoritos) {
+    localStorage.setItem("favoritos", JSON.stringify(favoritos));
+  }
+
   //Busqueda de personajes
   const buscador = (e) => {
     setBuscar(e.target.value);
@@ -95,7 +94,6 @@ const Agentes = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [agentesCargados]);
-
   return (
     <Box className="div_agente" background={"gray"}>
       <Input
@@ -111,6 +109,11 @@ const Agentes = () => {
           <CircleLoader color="#b12f3a" />
         ) : (
           resultado.map((agente, index) => {
+            favoritos.map((agenteFav) => {
+              if (agenteFav.uuid === agente.uuid) {
+                agente.corazonFav = agenteFav.corazonFav;
+              }
+            });
             return (
               <li key={index} className="li_agente">
                 <p>{agente.displayName}</p>
@@ -123,7 +126,7 @@ const Agentes = () => {
                   key={agente.uuid}
                   onClick={(e) => handleBookmarks(e, agente)}
                 >
-                  <img width="30px" src={corazonVacio} />
+                  <img width="30px" src={agente.corazonFav} />
                 </button>
               </li>
             );

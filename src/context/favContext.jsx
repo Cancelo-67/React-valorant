@@ -1,13 +1,5 @@
-import { createContext } from 'react'
+import React, { createContext } from "react";
 
+const favContext = createContext([]);
 
-const ContextFavoritos = React.createContext(
-  
-)
-return (
-  <favContext.Provider value={{fav, nofav}}>
-    {children}
-  </favContext.Provider>
-)
-
-export default ContextFavoritos
+export default favContext;

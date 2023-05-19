@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import "../css/style_navbar.scss";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../img/logo_transparent.png";
+//import { LoginContext } from "../context/LoginContext";
 
 const Navbar = () => {
   return (
