@@ -1,8 +1,9 @@
-import React from 'react'
-import { Outlet } from 'react-router-dom'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
+import React from "react";
+import { Outlet } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
+const user = true;
 const LayoutPublic = () => {
   return (
     <div>
@@ -10,7 +11,7 @@ const LayoutPublic = () => {
       <Outlet />
       <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default LayoutPublic
+export default LayoutPublic;

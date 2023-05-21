@@ -15,8 +15,8 @@ import {
 
 import "../css/style_iniciosesion.scss";
 import { useNavigate } from "react-router-dom";
-let RegExp = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/;
-//<------------------------- Componente -------------------------->
+
+//<------------------------- Page Register -------------------------->
 const Register = () => {
   const {
     register,
@@ -25,11 +25,15 @@ const Register = () => {
     formState: { errors },
   } = useForm({ mode: "onChange" });
 
-  const [show1, setShow1] = React.useState(false);
+  const [show1, setShow1] = useState(false);
   const handleClick1 = () => setShow1(!show1);
 
+  const usuarios = localStorage.getItem("usuarios")
+    ? JSON.parse(localStorage.getItem("usuarios"))
+    : [];
+
   const navigate = useNavigate();
-  const [show2, setShow2] = React.useState(false);
+  const [show2, setShow2] = useState(false);
   const handleClick2 = () => setShow2(!show2);
 
   const pass = useRef({});
@@ -38,12 +42,16 @@ const Register = () => {
   const onSubmit = (datos) => {
     const { nombre, apellido, email, contraseña, repetircontraseña } = datos;
 
-    if (RegExp.test(contraseña)) {
-      if (repetircontraseña === contraseña) {
-        localStorage.setItem("email", email);
-        localStorage.setItem("contraseña", contraseña);
-        navigate("/login");
-      }
+    const datosUsuario = {
+      nombre: nombre,
+      apellidos: apellido,
+      email: email,
+      contraseña: contraseña,
+    };
+    if (repetircontraseña === contraseña) {
+      usuarios.push(datosUsuario);
+      localStorage.setItem("usuarios", JSON.stringify(usuarios));
+      navigate("/login");
     }
   };
   return (

@@ -2,9 +2,11 @@ import React, { useContext } from "react";
 import "../css/style_navbar.scss";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../img/logo_transparent.png";
-//import { LoginContext } from "../context/LoginContext";
+import { LoginContext } from "../context/LoginContext";
 
 const Navbar = () => {
+  const { user, setUser } = useContext(LoginContext);
+
   return (
     <header className="div_nav">
       <Link to={"/"}>
@@ -24,7 +26,7 @@ const Navbar = () => {
           Favoritos
         </NavLink>
         <NavLink to="/login" className="nav_button">
-          Iniciar Sesion
+          Iniciar Sesión
         </NavLink>
         <NavLink to="/register" className="nav_button">
           Registrarse

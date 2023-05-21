@@ -44,8 +44,6 @@ const Agentes = () => {
     e.target.src = corazonVacio;
     agente.corazonFav = corazonVacio;
     setFavoritos(favoritos.filter((item) => item.uuid !== agente.uuid));
-    console.log(favoritos);
-    console.log("eliminado");
     ///cambiar el corazon
     // descargo favoritos, lo recorro, elimino el elemento que ha selecconado y lo vuelvo a subir.
   };
@@ -55,12 +53,9 @@ const Agentes = () => {
     e.target.src = corazonLleno;
     agente.corazonFav = corazonLleno;
     setFavoritos([...favoritos, agente]);
-    console.log(favoritos);
-    console.log("añadido");
     ///cambiar el corazon
     // descarego favoritos, añado el elemento que ha selecconado y lo vuelvo a subir.
   };
-  console.log(favoritos);
 
   //Actualizara el localstorage cada vez que elimino o añado algo al array
   function actualizarLocalStorage(favoritos) {

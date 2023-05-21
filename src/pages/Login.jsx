@@ -18,16 +18,18 @@ const InicioSesion = () => {
   const { register, handleSubmit } = useForm({ mode: "onChange" });
   const handleClick = () => setShow(!show);
   const navigate = useNavigate();
-  const emailRegistrado = localStorage.getItem("email");
-  const contraseñaRegistrado = localStorage.getItem("contraseña");
+  const usuarios = JSON.parse(localStorage.getItem("usuarios"));
 
   const onSubmit = (datos) => {
     const { email, contraseña } = datos;
-    if (email == emailRegistrado && contraseña == contraseñaRegistrado) {
-      navigate("/");
-    } else {
-      console.log("mal");
-    }
+    usuarios.map((usuario) => {
+      if (
+        usuario.email === datos.email &&
+        usuario.contraseña === datos.contraseña
+      ) {
+        navigate("/");
+      }
+    });
   };
 
   return (

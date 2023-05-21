@@ -1,55 +1,53 @@
-import { createBrowserRouter } from 'react-router-dom'
-import Agentes from '../pages/Agentes'
-import Armas from '../pages/Armas'
-import Mapas from '../pages/Mapas'
-import LayoutPublic from '../layouts/LayoutPublic'
-import NotFound from '../pages/NotFound'
-import Home from '../pages/Home'
-import InicioSesion from '../pages/Login'
-import Favoritos from '../pages/Favoritos'
-import Skins from '../pages/Skins'
-import Register from '../pages/Register'
-
-
+import { createBrowserRouter } from "react-router-dom";
+import Agentes from "../pages/Agentes";
+import Armas from "../pages/Armas";
+import Mapas from "../pages/Mapas";
+import LayoutPublic from "../layouts/LayoutPublic";
+import NotFound from "../pages/NotFound";
+import Home from "../pages/Home";
+import InicioSesion from "../pages/Login";
+import Favoritos from "../pages/Favoritos";
+import Skins from "../pages/Skins";
+import Register from "../pages/Register";
 
 export const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <LayoutPublic />,
     errorElement: <NotFound />,
     children: [
       {
-        path: '/',
-        element: <Home />
+        path: "/",
+        element: <Home />,
       },
       {
-        path: '/agentes',
+        path: "/agentes",
         element: <Agentes />,
       },
       {
-        path: '/armas',
+        path: "/armas",
         element: <Armas />,
       },
       {
-        path: '/mapas',
+        path: "/mapas",
         element: <Mapas />,
       },
       {
-        path: '/login',
+        path: "/login",
         element: <InicioSesion />,
       },
       {
-        path: '/register',
-        element: <Register />
+        path: "/register",
+        element: <Register />,
       },
       {
-        path: '/favoritos',
+        path: "/favoritos",
         element: <Favoritos />,
       },
       {
-        path: '/armas/:arma',
-        element: <Skins />
-      }
+        path: "/armas/:arma",
+        element: <Skins />,
+      },
     ],
   },
-])
+]);
