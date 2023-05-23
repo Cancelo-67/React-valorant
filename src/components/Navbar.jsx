@@ -6,7 +6,6 @@ import { LoginContext } from "../context/LoginContext";
 
 const Navbar = () => {
   const { user, setUser } = useContext(LoginContext);
-  console.log(user);
 
   const cerrarSesion = () => {
     setUser(false);

@@ -65,7 +65,6 @@ const Agentes = () => {
 
   //Actualizara el localstorage cada vez que elimino o añado algo al array
   function actualizarLocalStorage(favoritos) {
-    console.log(favClave);
     localStorage.setItem(favClave, JSON.stringify(favoritos));
   }
 
