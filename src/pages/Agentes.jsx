@@ -7,14 +7,20 @@ import corazonLleno from "../img/corazonLleno.svg";
 import { callApi } from "../helper/callApi";
 
 const Agentes = () => {
-  const favoritosInicial = JSON.parse(localStorage.getItem("favoritos")) || [];
-
   const url = "https://valorant-api.com/v1/agents?isPlayableCharacter=true";
   const [buscar, setBuscar] = useState(Boolean);
-  const [favoritos, setFavoritos] = useState(favoritosInicial);
   const [agentes, setAgentes] = useState([]);
   const [loading, setLoading] = useState(true); // Si es false sale el spinner, si esta false carga el array
   const [agentesCargados, setagentesCargados] = useState(10);
+
+  //La clave del localstorage sea diferente segun el usuario
+  const usuarioLogueado = JSON.parse(localStorage.getItem("usuarioActual"));
+  const nombre = usuarioLogueado.nombre;
+  const apellidos = usuarioLogueado.apellidos;
+  const favClave = `favorite_${nombre}_${apellidos}`;
+
+  let favoritosInicial = JSON.parse(localStorage.getItem(favClave)) || [];
+  const [favoritos, setFavoritos] = useState(favoritosInicial);
   actualizarLocalStorage(favoritos);
 
   //Llamo a la funcion
@@ -59,7 +65,8 @@ const Agentes = () => {
 
   //Actualizara el localstorage cada vez que elimino o añado algo al array
   function actualizarLocalStorage(favoritos) {
-    localStorage.setItem("favoritos", JSON.stringify(favoritos));
+    console.log(favClave);
+    localStorage.setItem(favClave, JSON.stringify(favoritos));
   }
 
   //Busqueda de personajes

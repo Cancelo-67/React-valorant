@@ -9,6 +9,7 @@ import InicioSesion from "../pages/Login";
 import Favoritos from "../pages/Favoritos";
 import Skins from "../pages/Skins";
 import Register from "../pages/Register";
+import Perfil from "../pages/Perfil";
 
 export const router = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ export const router = createBrowserRouter([
       {
         path: "/armas/:arma",
         element: <Skins />,
+      },
+      {
+        path: "/perfil",
+        element: <Perfil />,
       },
     ],
   },

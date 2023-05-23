@@ -7,31 +7,39 @@ import {
   InputGroup,
   InputRightElement,
   Button,
+  cookieStorageManager,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import "../css/style_iniciosesion.scss";
+import { LoginContext } from "../context/LoginContext";
 
 const InicioSesion = () => {
-  const [show, setShow] = React.useState(false);
+  const [show, setShow] = useState(false);
   const { register, handleSubmit } = useForm({ mode: "onChange" });
   const handleClick = () => setShow(!show);
   const navigate = useNavigate();
   const usuarios = JSON.parse(localStorage.getItem("usuarios"));
+  //Declaramos el context
+  let { user, setUser } = useContext(LoginContext);
 
   const onSubmit = (datos) => {
     const { email, contraseña } = datos;
     usuarios.map((usuario) => {
-      if (
-        usuario.email === datos.email &&
-        usuario.contraseña === datos.contraseña
-      ) {
+      if (usuario.email === email && usuario.contraseña === contraseña) {
+        const usuarioActual = {
+          nombre: usuario.nombre,
+          apellidos: usuario.apellidos,
+          email: usuario.email,
+          contraseña: usuario.contraseña,
+        };
+        setUser(true);
+        localStorage.setItem("usuarioActual", JSON.stringify(usuarioActual));
         navigate("/");
       }
     });
   };
-
   return (
     <Center alignContent="center" justify="center" background={"gray"}>
       <VStack>

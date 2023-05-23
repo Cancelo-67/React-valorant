@@ -4,7 +4,11 @@ import { CircleLoader } from "react-spinners";
 import "../css/style_agentes.scss";
 
 const Favoritos = () => {
-  let datos = JSON.parse(localStorage.getItem("favoritos"));
+  const usuarioLogueado = JSON.parse(localStorage.getItem("usuarioActual"));
+  const nombre = usuarioLogueado.nombre;
+  const apellidos = usuarioLogueado.apellidos;
+  const favClave = `favorite_${nombre}_${apellidos}`;
+  let datos = JSON.parse(localStorage.getItem(favClave));
 
   return (
     <Box className="div_agente" background={"gray"}>
