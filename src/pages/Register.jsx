@@ -15,7 +15,7 @@ import {
 
 import "../css/style_iniciosesion.scss";
 import { useNavigate } from "react-router-dom";
-
+import Popup from "../components/PopUp";
 //<------------------------- Page Register -------------------------->
 const Register = () => {
   const {
@@ -24,6 +24,8 @@ const Register = () => {
     watch,
     formState: { errors },
   } = useForm({ mode: "onChange" });
+  //Creo un useState para el popup.
+  const [isPopupOpen, setPopupOpen] = useState(false);
 
   const [show1, setShow1] = useState(false);
   const handleClick1 = () => setShow1(!show1);
@@ -51,9 +53,14 @@ const Register = () => {
     if (repetircontraseña === contraseña) {
       usuarios.push(datosUsuario);
       localStorage.setItem("usuarios", JSON.stringify(usuarios));
-      navigate("/login");
+
+      setPopupOpen(true);
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
     }
   };
+
   return (
     <Center alignContent="center" justify="center" background={"gray"}>
       <VStack>
@@ -210,6 +217,11 @@ const Register = () => {
             Entrar
           </Button>
         </form>
+        <Popup
+          isOpen={isPopupOpen}
+          onClose={() => setPopupOpen(false)}
+          text={"Usuario registrado correctamente"}
+        />
       </VStack>
     </Center>
   );

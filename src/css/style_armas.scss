@@ -1,26 +1,35 @@
-
 // --------- BODY ---------
-html{
-    background-color: gray;
+html {
+  background-color: gray;
 }
-.div_load{
-    min-height: 700px;
+.div_load {
+  min-height: 700px;
+}
+
+.css-a2wsy3 {
+  li:last-child {
+    margin-bottom: 11%;
+  }
 }
 
 .ul_armas {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-.li_armas{
-        width: 50%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        border-radius: 10px;
-        margin: 10px;
-        img{
-            width: 80%;
-        }
+.li_armas {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  margin: 4%;
+
+  img {
+    width: 80%;
+  }
+  li:last-child {
+    margin-bottom: 5%;
+  }
 }

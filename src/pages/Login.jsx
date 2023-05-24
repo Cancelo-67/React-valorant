@@ -7,13 +7,13 @@ import {
   InputGroup,
   InputRightElement,
   Button,
-  cookieStorageManager,
 } from "@chakra-ui/react";
 import React, { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import "../css/style_iniciosesion.scss";
 import { LoginContext } from "../context/LoginContext";
+import Popup from "../components/PopUp";
 
 const InicioSesion = () => {
   const [show, setShow] = useState(false);
@@ -21,10 +21,13 @@ const InicioSesion = () => {
   const handleClick = () => setShow(!show);
   const navigate = useNavigate();
   const usuarios = JSON.parse(localStorage.getItem("usuarios"));
+  const activar = false;
+  //Creo un useState para el popup.
+  const [isPopupOpen, setPopupOpen] = useState(false);
   //Declaramos el context
   let { user, setUser } = useContext(LoginContext);
 
-  const onSubmit = (datos) => {
+  const onSubmit = (datos, activar) => {
     const { email, contraseña } = datos;
     usuarios.map((usuario) => {
       if (usuario.email === email && usuario.contraseña === contraseña) {
@@ -34,16 +37,22 @@ const InicioSesion = () => {
           email: usuario.email,
           contraseña: usuario.contraseña,
         };
+        activar = true;
         setUser(true);
         localStorage.setItem("usuarioActual", JSON.stringify(usuarioActual));
-        navigate("/");
+        setPopupOpen(true);
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
+      } else {
+        activar = false;
       }
     });
   };
   return (
     <Center alignContent="center" justify="center" background={"gray"}>
       <VStack>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit, activar)}>
           {/* Email */}
           <FormControl marginBottom={10} marginTop={10}>
             <FormLabel>Email</FormLabel>
@@ -77,6 +86,19 @@ const InicioSesion = () => {
             Entrar
           </Button>
         </form>
+        {!activar ? (
+          <Popup
+            isOpen={isPopupOpen}
+            onClose={() => setPopupOpen(false)}
+            text={"Usuario logueado correctamente"}
+          />
+        ) : (
+          <Popup
+            isOpen={isPopupOpen}
+            onClose={() => setPopupOpen(false)}
+            text={"Las credenciales fueron mal introducidas"}
+          />
+        )}
       </VStack>
     </Center>
   );

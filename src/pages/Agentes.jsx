@@ -11,7 +11,7 @@ const Agentes = () => {
   const [buscar, setBuscar] = useState(Boolean);
   const [agentes, setAgentes] = useState([]);
   const [loading, setLoading] = useState(true); // Si es false sale el spinner, si esta false carga el array
-  const [agentesCargados, setagentesCargados] = useState(10);
+  const [agentesCargados, setagentesCargados] = useState(5);
 
   //La clave del localstorage sea diferente segun el usuario
   const usuarioLogueado = JSON.parse(localStorage.getItem("usuarioActual"));
@@ -38,14 +38,14 @@ const Agentes = () => {
   //Favoritos
   const handleBookmarks = (e, agente) => {
     if (agente.corazonFav === corazonLleno) {
-      eliminarFavorito(e, agente);
+      deleteBookmarks(e, agente);
     } else {
       añadirFavorito(e, agente);
     }
   };
 
   //Elimina del array el agente marcado
-  const eliminarFavorito = (e, agente) => {
+  const deleteBookmarks = (e, agente) => {
     agente.favoritos = false;
     e.target.src = corazonVacio;
     agente.corazonFav = corazonVacio;
@@ -89,7 +89,7 @@ const Agentes = () => {
         document.documentElement.scrollHeight;
       if (bottom) {
         // si llega al final de la página, carga más elementos
-        setagentesCargados(agentesCargados + 5); // cargas 5 elementos mas
+        setagentesCargados(agentesCargados + 2); // cargas 5 elementos mas
       }
     }
     window.addEventListener("scroll", handleScroll);

@@ -1,0 +1,9 @@
+.ul_skins {
+  display: flex;
+  flex-direction: row;
+  li {
+  }
+  li:last-child {
+    margin-bottom: 10%;
+  }
+}
